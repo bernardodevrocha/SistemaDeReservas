@@ -3,11 +3,20 @@ export class DateRange{
   private readonly endDate: Date;
 
   constructor(startDate: Date, endDate: Date){
-    if(endDate <= startDate){
-      throw new Error("A data de término deve ser posterior a data de início");
-    }
+    this.validateDates(startDate, endDate);
+
     this.startDate = startDate;
     this.endDate = endDate;
+  }
+
+  private validateDates(startDate: Date, endDate: Date): void{
+    if(endDate < startDate){
+      throw new Error("A data de término deve ser posterior a data de início.");
+    }
+    
+    if(endDate == startDate){
+      throw new Error("A data início e termino não podem ser iguais!");
+    }
   }
 
   getStartDate(): Date{
